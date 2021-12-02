@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { Flex, Box, Text, Icon } from "@chakra-ui/react";
 import { BsFilter } from "react-icons/bs";
+import SearchFilters from "../components/SearchFilters";
+import Property from "../components/Property";
+import noResult from "../assets/images/noresult.svg";
 
 const Search = () => {
   const [searchFilters, setSearchFilters] = useState(false);
@@ -25,6 +28,26 @@ const Search = () => {
         <Text>Search Properties</Text>
         <Icon paddingLeft="2" w="7" as={BsFilter} />
       </Flex>
+      {searchFilters && <SearchFilters />}
+      <Text fontSize="xl" p="4" fontWeight="bold">
+        Properties {router.query.purpose}
+      </Text>
+      <Flex flexWrap="wrap">
+        {[].map((property) => (
+          <Property peroperty={property} key={property.id} />
+        ))}
+      </Flex>
+      {[].length === 0 && (
+        <Flex
+          justifyContent="center"
+          alignItems="center"
+          flexDirection="column"
+          marginTop="5"
+          marginBottom="5"
+        >
+          <Image alt="no result" src={noResult} />
+        </Flex>
+      )}
     </Box>
   );
 };
