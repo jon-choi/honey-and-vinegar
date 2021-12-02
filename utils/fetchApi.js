@@ -9,4 +9,6 @@ export const fetchApi = async (url) => {
       "x-rapidapi-key": "1666920e64msh94ed237174ec49bp1b32aejsn075192e878a2",
     },
   });
+
+  return data;
 };
