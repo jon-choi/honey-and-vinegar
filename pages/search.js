@@ -7,7 +7,7 @@ import SearchFilters from "../components/SearchFilters";
 import Property from "../components/Property";
 import noResult from "../assets/images/noresult.svg";
 
-const Search = () => {
+const Search = ({ properties }) => {
   const [searchFilters, setSearchFilters] = useState(false);
   const router = useRouter();
 
@@ -33,11 +33,11 @@ const Search = () => {
         Properties {router.query.purpose}
       </Text>
       <Flex flexWrap="wrap">
-        {[].map((property) => (
-          <Property peroperty={property} key={property.id} />
+        {properties.map((property) => (
+          <Property property={property} key={property.id} />
         ))}
       </Flex>
-      {[].length === 0 && (
+      {properties.length === 0 && (
         <Flex
           justifyContent="center"
           alignItems="center"
@@ -46,6 +46,9 @@ const Search = () => {
           marginBottom="5"
         >
           <Image alt="no result" src={noResult} />
+          <Text fontSize="2xl" marginTop="3">
+            No results found
+          </Text>
         </Flex>
       )}
     </Box>
@@ -53,3 +56,26 @@ const Search = () => {
 };
 
 export default Search;
+
+export async function getServerSideProps({ query }) {
+  const purpose = query.purpose || "for-rent";
+  const rentFrequency = query.rentFrequency || "yearly";
+  const minPrice = query.minPrice || "0";
+  const maxPrice = query.maxPrice || "1000000";
+  const minRooms = query.minRooms || "0";
+  const minBaths = query.minBaths || "0";
+  const sort = query.sort || "price-desc";
+  const maxArea = query.maxArea || "35000";
+  const locationExternalIDs = query.locationExternalIDs || "5002";
+  const categoryExternalID = query.categoryExternalID || "4";
+
+  const data = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${minBaths}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${minRooms}&sort=${sort}&areaMax=${maxArea}`
+  );
+
+  return {
+    props: {
+      properties: data?.hits,
+    },
+  };
+}
