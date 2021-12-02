@@ -28,7 +28,7 @@ const Banner = ({
         <br />
         {desc2}
       </Text>
-      <Button fontSize="xl" bg="blue.300" color="white">
+      <Button fontSize="xl">
         <Link href={linkName}>{buttonText}</Link>
       </Button>
     </Box>
@@ -40,20 +40,20 @@ export default function Home() {
     <div>
       <h1>Hello World</h1>
       <Banner
-        purpose="RENT A HOME"
+        purpose="Rent A Home"
         title1="Rental Homes for"
         title2="Everyone"
-        desc1="Explore Apartments, Villas, Homes"
+        desc1="Explore Homes, Condos, "
         desc2="and more"
         buttonText="Explore Rentals"
         linkName="/search?purpose=for-rent"
         imageUrl="https://bayut-production.s3.eu-central-1.amazonaws.com/image/145426814/33973352624c48628e41f2ec460faba4"
       />
       <Banner
-        purpose="Buy A HOME"
+        purpose="Buy A Home"
         title1="Find, Buy & Own Your"
         title2="Dream Home"
-        desc1="Explore Apartments, Villas, Homes"
+        desc1="Explore Homes, Condos, "
         desc2="and more"
         buttonText="Explore Properties for sale"
         linkName="/search?purpose=for-sale"
