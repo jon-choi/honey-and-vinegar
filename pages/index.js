@@ -37,8 +37,7 @@ const Banner = ({
 
 export default function Home() {
   return (
-    <div>
-      <h1>Hello World</h1>
+    <Box>
       <Banner
         purpose="Rent A Home"
         title1="Rental Homes for"
@@ -59,6 +58,6 @@ export default function Home() {
         linkName="/search?purpose=for-sale"
         imageUrl="https://bayut-production.s3.eu-central-1.amazonaws.com/image/110993385/6a070e8e1bae4f7d8c1429bc303d2008"
       />
-    </div>
+    </Box>
   );
 }
